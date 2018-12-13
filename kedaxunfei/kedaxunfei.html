@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="js/HZRecorder.js"></script>
+</head>
+<button type="button" class="btn btn-primary" onclick="recognizeStart()">开始录制</button>
+<button type="button" class="btn btn-primary" onclick="recognizeStop()">停止</button>
+<button type="button" class="btn btn-primary btn-start-recognize" onclick="recognizeUpload()">开始识别</button>
+
+<div id="download">down</div>
+<div id="audio"></div>
+
+<script>
+function get(id) {
+    return document.getElementById(id);
+}
+
+var elAudio = get("audio");
+
+function recognizeStart() {
+    // that.$scope.start = false;
+    HZRecorder.get(function(rec) {
+        recorder = rec;
+        recorder.start();
+
+    });
+}
+
+function recognizeStop() {
+	var data = recorder.getBlob();
+	  open(URL.createObjectURL(data));
+
+}
+// function recognizeUpload () {
+//      recorder.stop();
+//      recorder.upload("http://192.168.1.156:8088/api/upload/listenFile", function (state, e) {
+//          switch (state) {
+//              case 'uploading':
+//                  break;
+//              case 'ok':
+//                  console.log("上传成功");
+//                  // 打印后端传回的识别结果
+//                  console.log(e.target.responseText);
+//                  break;
+//              case 'error':
+//                  alert("上传失败");
+//                  break;
+//              case 'cancel':
+//                  alert("上传被取消");
+//                  break;
+//          }
+//      });
+//  }
+</script>
+
+</html>
